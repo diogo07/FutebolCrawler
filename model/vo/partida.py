@@ -1,4 +1,4 @@
-from vo.cotacoes import Cotacoes
+from model.vo.cotacoes import Cotacoes
 
 
 class Partida:
