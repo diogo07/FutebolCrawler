@@ -2,8 +2,8 @@ from model.vo.cotacoes import Cotacoes
 
 
 class Partida:
-    def __init__(self, id, campeonato, data, horario, time_casa, time_fora, status, placar_casa, placar_fora):
-        self.id = id
+    def __init__(self, codigo, campeonato, data, horario, time_casa, time_fora, status, placar_casa, placar_fora):
+        self.codigo = codigo
         self.campeonato = campeonato
         self.data = data
         self.horario = horario
@@ -12,7 +12,7 @@ class Partida:
         self.status = status
         self.placar_casa = placar_casa
         self.placar_fora = placar_fora
-        self.cotacoes = Cotacoes(id)
+        self.cotacoes = Cotacoes(codigo)
 
     def __repr__(self):
         return str(self.__dict__)

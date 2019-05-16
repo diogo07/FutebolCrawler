@@ -6,13 +6,22 @@ class Raspagem:
     def get_link_partidas(self, html):
         link_partidas = []
         soup = BeautifulSoup(html)
-        partidas_encerradas = soup.findAll('tr', class_='stage-finished')
-        partidas_em_andamento = soup.findAll('tr', class_='stage-live')
-        partidas_nao_iniciadas = soup.findAll('tr', class_='stage-scheduled')
+        partidas_encerradas = soup.findAll('div', class_='event__match--inline')
+        partidas_em_andamento = soup.findAll('div', class_='event__match--live')
+        partidas_nao_iniciadas = soup.findAll('div', class_='event__match--scheduled')
 
         print(partidas_encerradas.__len__())
         print(partidas_nao_iniciadas.__len__())
         print(partidas_em_andamento.__len__())
+
+
+        for p_n_ini in partidas_nao_iniciadas:
+            id_partida_nao_iniciada = str(p_n_ini.get('id')).replace('g_1_', '')
+            dados = []
+            dados.append('não iniciada')
+            dados.append('https://www.resultados.com/jogo/' + id_partida_nao_iniciada + '/#comparacao-de-odds;1x2-odds;tempo-regulamentar')
+            dados.append(id_partida_nao_iniciada)
+            link_partidas.append(dados)
 
         for p_enc in partidas_encerradas:
             id_partida_encerrada = str(p_enc.get('id')).replace('g_1_', '')
@@ -32,17 +41,7 @@ class Raspagem:
             dados.append(id_partida_em_andamento)
             link_partidas.append(dados)
 
-        for p_n_ini in partidas_nao_iniciadas:
-            res = p_n_ini.find('span', class_='xxx')
 
-            if res != None:
-                id_partida_nao_iniciada = str(p_n_ini.get('id')).replace('g_1_', '')
-                dados = []
-                dados.append('não iniciada')
-                dados.append(
-                    'https://www.resultados.com/jogo/' + id_partida_nao_iniciada + '/#comparacao-de-odds;1x2-odds;tempo-regulamentar')
-                dados.append(id_partida_nao_iniciada)
-                link_partidas.append(dados)
 
         return link_partidas
 
@@ -67,6 +66,8 @@ class Raspagem:
         html_odds_vencedor_full_time = dados_vencedor_full_time.findAll('td', class_="kx")
 
         dados_vencedor_full_time = [odd.get_text() for odd in html_odds_vencedor_full_time]
+
+
 
         partida = Partida(id, campeonato, data, hora, time_casa, time_fora, status, 0 ,0)
 

@@ -26,12 +26,14 @@ class Coleta:
 
         html = self.wd.page_source
 
-        trs = self.wd.find_elements_by_class_name('bottom-no-border')
+        divs = self.wd.find_elements_by_class_name('expand')
 
-        for tr in trs:
-            bt = tr.find_elements_by_class_name('expand-league-link')
+        print(divs)
 
-            bt[0].click()
+        for div in divs:
+            #bt = tr.find_elements_by_class_name('expand-league-link')
+            print(div)
+            div.click()
 
         html = self.wd.page_source
         self.wd.quit()
@@ -46,12 +48,12 @@ class Coleta:
 
         if dias > 7:
             for i in range(7):
-                bt_proximo_dia = self.wd.find_element_by_xpath('//*[@id="ifmenu-calendar"]/span[3]')
+                bt_proximo_dia = self.wd.find_element_by_xpath('//*[@id="live-table"]/div[2]/div/div[3]/div')
                 bt_proximo_dia.click()
                 time.sleep(5)
         else:
             for i in range(dias):
-                bt_proximo_dia = self.wd.find_element_by_xpath('//*[@id="ifmenu-calendar"]/span[3]')
+                bt_proximo_dia = self.wd.find_element_by_xpath('//*[@id="live-table"]/div[2]/div/div[3]/div')
                 bt_proximo_dia.click()
                 time.sleep(5)
         try:
@@ -62,11 +64,10 @@ class Coleta:
             print("Erro: tempo esgotado")
             return 0
 
-        trs = self.wd.find_elements_by_class_name('bottom-no-border')
+        divs = self.wd.find_elements_by_class_name('event__header--no-my-games')
 
-        for tr in trs:
-            bt = tr.find_elements_by_class_name('expand-league-link')
-
+        for div in divs:
+            bt = div.find_elements_by_class_name('expand')
             bt[0].click()
 
         html = self.wd.page_source
