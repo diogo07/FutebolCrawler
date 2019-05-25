@@ -5,8 +5,8 @@ class Raspagem:
 
     def get_link_partidas(self, html):
         link_partidas = []
-        soup = BeautifulSoup(html)
-        partidas_encerradas = soup.findAll('div', class_='event__match--inline')
+        soup = BeautifulSoup(html, "html.parser")
+        partidas_encerradas = soup.findAll('div', class_='event__match')
         partidas_em_andamento = soup.findAll('div', class_='event__match--live')
         partidas_nao_iniciadas = soup.findAll('div', class_='event__match--scheduled')
 
@@ -48,7 +48,7 @@ class Raspagem:
     def get_dados_partida(self, html, status, id):
 
 
-        soup = BeautifulSoup(html)
+        soup = BeautifulSoup(html, "html.parser")
 
         times = soup.findAll('a', class_="participant-imglink")
         time_casa = times[3].get_text()
