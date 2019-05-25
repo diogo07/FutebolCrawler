@@ -28,11 +28,8 @@ class Coleta:
 
         divs = self.wd.find_elements_by_class_name('expand')
 
-        print(divs)
 
         for div in divs:
-            #bt = tr.find_elements_by_class_name('expand-league-link')
-            print(div)
             div.click()
 
         html = self.wd.page_source

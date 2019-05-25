@@ -3,12 +3,9 @@ from coleta.raspagem import Raspagem
 from model.dao.conexao import Conexao
 from model.dao.partida_dao import PartidaDAO
 from model.dao.cotacoes_dao import CotacoesDAO
+import root
 
-#baixar o drive do navegador no link abaixo
-#https://sites.google.com/a/chromium.org/chromedriver/downloads
-#colocar na pasta /Scripts/ onde está instalado o Python
-#Trocar o nome Diogo pelo nome de usuario do seu PC no caminho abaixo
-webdriver = "C:/Python/virtualenv/virtual_futebol_crawler/Scripts/chromedriver.exe"
+webdriver = root.get_caminho()+"/resource/chromedriver.exe"
 
 coleta = Coleta(webdriver, "chrome")
 
