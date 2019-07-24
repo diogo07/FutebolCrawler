@@ -19,7 +19,7 @@ html_resultados = coleta.buscar_html_dinamico_por_data('https://www.resultados.c
 raspagem = Raspagem()
 
 links = raspagem.get_link_partidas(html_resultados)
-#conexao = Conexao('localhost', 'root', '', 'futebol')
+conexao = Conexao('localhost', 'root', '', 'futebol')
 partidaDAO = PartidaDAO()
 cotacoesDAO = CotacoesDAO()
 
@@ -33,8 +33,8 @@ for l in links:
       html_jogo = coleta.buscar_html_dinamico(l[1], 30, '//div[@class="odds-comparison-bookmark ifmenu-wrapper"]')
       partida = raspagem.get_dados_partida(html_jogo, l[0], l[2])
       print(partida.__repr__())
-      #partidaDAO.insert(partida, conexao.banco)
-      #cotacoesDAO.insert(partida.cotacoes, conexao.banco)
+      partidaDAO.insert(partida, conexao.banco)
+      cotacoesDAO.insert(partida.cotacoes, conexao.banco)
    '''
    if l[0] == 'encerrada':
       # Trocar o nome Diogo pelo nome de usuario do seu PC no caminho abaixo

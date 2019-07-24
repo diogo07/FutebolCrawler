@@ -51,8 +51,8 @@ class Raspagem:
         soup = BeautifulSoup(html, "html.parser")
 
         times = soup.findAll('a', class_="participant-imglink")
-        time_casa = times[3].get_text()
-        time_fora = times[1].get_text()
+        time_casa = times[1].get_text()
+        time_fora = times[3].get_text()
 
         info_horario = soup.findAll('div', class_='mstat-date')
         data = str(info_horario[0].get_text()).split(' ')[0].replace('.', '/')
